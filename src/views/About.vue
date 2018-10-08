@@ -1,12 +1,12 @@
 <template>
-  <div class="home">
-    <h1>spacer</h1>
+  <div>
+    <h1>spacer about</h1>
   </div>
 </template>
 
 <script>
 
 export default {
-  name: 'home',
+  name: 'About',
 };
 </script>
