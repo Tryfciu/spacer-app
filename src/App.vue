@@ -12,6 +12,10 @@
       @input="handleInput"
       :dark="step === 1"
     />
+    <div class="results" v-if="results && !loading && step === 1">
+      <Item v-for="item in results" :key="item.data[0].nasa_id" :item="item" :title="item.title"/>
+    </div>
+    <Modal />
   </div>
 </template>
 
@@ -21,6 +25,8 @@ import debounce from 'lodash.debounce';
 import Claim from '@/components/Claim.vue';
 import SearchInput from '@/components/SearchInput.vue';
 import HeroImage from '@/components/HeroImage.vue';
+import Item from '@/components/Item.vue';
+import Modal from '@/components/Modal.vue';
 
 const API = 'https://images-api.nasa.gov/search';
 
@@ -30,6 +36,8 @@ export default {
     Claim,
     SearchInput,
     HeroImage,
+    Item,
+    Modal,
   },
   data() {
     return {
@@ -108,4 +116,17 @@ body {
   position: absolute;
   top: 30px;
 }
+
+.results {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+}
+
 </style>

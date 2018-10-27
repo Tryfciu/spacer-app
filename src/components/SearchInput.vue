@@ -50,7 +50,7 @@ input:focus {
 
 .dark {
   color: #1e3d4a;
-  box-shadow: #1e3d4a;
+  border-bottom-color: #1e3d4a;
 }
 
 .dark:focus {
