@@ -4,25 +4,25 @@
 
 <script>
 export default {
-    name: 'Item',
-    props: {
-        item: {
-            type: Object,
-            required: true,
-        },
+  name: 'Item',
+  props: {
+    item: {
+      type: Object,
+      required: true,
     },
-    data() {
-        return {
-            photo: this.item.links[0].href,
-            title: this.item.data[0].title,
-        };
+  },
+  data() {
+    return {
+      photo: this.item.links[0].href,
+      title: this.item.data[0].title,
+    };
+  },
+  computed: {
+    style() {
+      return `backgroundImage: url("${this.photo}")`;
     },
-    computed: {
-        style() {
-            return `backgroundImage: url("${this.photo}")`;
-        },
-    },
-}
+  },
+};
 </script>
 
 <style lang="scss" scoped>
