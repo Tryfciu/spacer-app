@@ -13,9 +13,15 @@
       :dark="step === 1"
     />
     <div class="results" v-if="results && !loading && step === 1">
-      <Item v-for="item in results" :key="item.data[0].nasa_id" :item="item" :title="item.title"/>
+      <Item
+      v-for="item in results"
+      :key="item.data[0].nasa_id"
+      :item="item"
+      :title="item.title"
+      @click.native="handleModalOpen(item)" />
     </div>
-    <Modal />
+    <div class="loader" v-if="step === 1 && loading" />
+    <Modal v-if="modalOpen" @closeModal="modalOpen = false" :item="modalItem" />
   </div>
 </template>
 
@@ -45,6 +51,8 @@ export default {
       results: [],
       loading: false,
       step: 0,
+      modalOpen: false,
+      modalItem: null,
     };
   },
   methods: {
@@ -60,6 +68,10 @@ export default {
           console.log(error);
         });
     }, 500),
+    handleModalOpen(item) {
+      this.modalOpen = true;
+      this.modalItem = item;
+    },
   },
 };
 </script>
@@ -112,6 +124,40 @@ body {
   }
 }
 
+.loader {
+  margin-top: 100px;
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+  @media (min-width: 768px) {
+    width: 90px;
+    height: 90px;
+  }
+}
+.loader:after {
+  content: " ";
+  display: block;
+  width: 46px;
+  height: 46px;
+  margin: 1px;
+  border-radius: 50%;
+  border: 5px solid #1e3d4a;
+  border-color: #1e3d4a transparent #1e3d4a transparent;
+  animation: loading 1.2s linear infinite;
+  @media (min-width: 768px) {
+    width: 90px;
+    height: 90px;
+  }
+}
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .logo {
   position: absolute;
   top: 30px;
@@ -124,6 +170,7 @@ body {
   grid-gap: 20px;
 
   @media (min-width: 768px) {
+    width: 90%;
     grid-template-columns: 1fr 1fr 1fr;
   }
 
