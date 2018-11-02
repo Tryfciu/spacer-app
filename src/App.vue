@@ -6,7 +6,7 @@
     <transition name="fade">
       <HeroImage v-if="step === 0"/>
     </transition>
-    <Claim  v-if="step === 0"/>
+    <Claim  v-show="step === 0"/>
     <search-input
       v-model="searchValue"
       @input="handleInput"
